@@ -940,9 +940,9 @@ class Decoder : public Component
 
     static const unsigned IPORT = 130;
     static const unsigned OPRT = 131;
-    
 
-    
+
+
     static int32_t align(unsigned x, unsigned y)
     {
         return (x + y - 1) & (~(y - 1));
@@ -953,7 +953,7 @@ class Decoder : public Component
           ready_(false)
     {
         requestCallback();
-       
+
     }
 
     void SetCodec()
@@ -965,7 +965,7 @@ class Decoder : public Component
 
     }
 
-    
+
     void requestCallback()
     {
         Parameter<OMX_CONFIG_REQUESTCALLBACKTYPE> cbtype;
@@ -998,7 +998,7 @@ class Decoder : public Component
   private:
     Buffer bufferIn_;
     bool ready_;
-};  
+};
 
 /// Raspberry Pi Camera Module
 class Camera : public Component
@@ -1408,7 +1408,7 @@ class Encoder : public Component
         PixelAspect->nY=PixelY;
          ERR_OMX(OMX_SetParameter(component_, OMX_IndexParamBrcmPixelAspectRatio, &PixelAspect), "set Aspext Pixel");
 
-        
+
 
     }
 
@@ -1598,27 +1598,27 @@ LOW_LATENCY mode is not a mode intended for general use. There was a specific us
         fprintf(stderr,"AvcConfig->bDirect8x8Inference %d\n", AvcConfig->bDirect8x8Inference);
         fprintf(stderr,"AvcConfig->bDirectSpatialTemporal %d\n", AvcConfig->bDirectSpatialTemporal);
         fprintf(stderr,"AvcConfig->nCabacInitIdc %d\n", AvcConfig->nCabacInitIdc);
-        /* AvcConfig->nSliceHeaderSpacing;  
-    AvcConfig->nPFrames;     
-    AvcConfig->nBFrames;     
+        /* AvcConfig->nSliceHeaderSpacing;
+    AvcConfig->nPFrames;
+    AvcConfig->nBFrames;
     AvcConfig->bUseHadamard;
-    AvcConfig->nRefFrames;  
+    AvcConfig->nRefFrames;
 	AvcConfig->nRefIdx10ActiveMinus1;
 	AvcConfig->nRefIdx11ActiveMinus1;
-    AvcConfig->bEnableUEP;  
-    AvcConfig->bEnableFMO;  
-    AvcConfig->bEnableASO;  
-    AvcConfig->bEnableRS;   
+    AvcConfig->bEnableUEP;
+    AvcConfig->bEnableFMO;
+    AvcConfig->bEnableASO;
+    AvcConfig->bEnableRS;
     //OMX_VIDEO_AVCPROFILETYPE eProfile;
-	//OMX_VIDEO_AVCLEVELTYPE eLevel; 
-    AvcConfig->nAllowedPictureTypes;  
-	AvcConfig->bFrameMBsOnly;        									
-    AvcConfig->bMBAFF;               
-    AvcConfig->bEntropyCodingCABAC;  
-    AvcConfig->bWeightedPPrediction; 
-    AvcConfig->nWeightedBipredicitonMode; 
+	//OMX_VIDEO_AVCLEVELTYPE eLevel;
+    AvcConfig->nAllowedPictureTypes;
+	AvcConfig->bFrameMBsOnly;
+    AvcConfig->bMBAFF;
+    AvcConfig->bEntropyCodingCABAC;
+    AvcConfig->bWeightedPPrediction;
+    AvcConfig->nWeightedBipredicitonMode;
     AvcConfig->bconstIpred ;
-    AvcConfig->bDirect8x8Inference;  
+    AvcConfig->bDirect8x8Inference;
 	AvcConfig->bDirectSpatialTemporal;
 	AvcConfig->nCabacInitIdc;
     */
@@ -1686,7 +1686,7 @@ LOW_LATENCY mode is not a mode intended for general use. There was a specific us
         ERR_OMX(OMX_SetParameter(component_, OMX_IndexParamVideoQuantization, &QP), " QP");
 
         /* From http://osxr.org:8080/android/source/hardware/ti/omap3/omx/video/src/openmax_il/video_encode/src/OMX_VideoEncoder.c
-Set pQuantization defaults 
+Set pQuantization defaults
      OMX_CONF_INIT_STRUCT(pComponentPrivate->pQuantization, OMX_VIDEO_PARAM_QUANTIZATIONTYPE);
      pComponentPrivate->pQuantization->nPortIndex = VIDENC_OUTPUT_PORT;
     pComponentPrivate->pQuantization->nQpI       = 12;
@@ -1701,8 +1701,8 @@ Set pQuantization defaults
     OMX_VIDEO_SLICEMODE_AVCDefault = 0,
     OMX_VIDEO_SLICEMODE_AVCMBSlice,
     OMX_VIDEO_SLICEMODE_AVCByteSlice,
-    OMX_VIDEO_SLICEMODE_AVCKhronosExtensions = 0x6F000000, 
-    OMX_VIDEO_SLICEMODE_AVCVendorStartUnused = 0x7F000000, 
+    OMX_VIDEO_SLICEMODE_AVCKhronosExtensions = 0x6F000000,
+    OMX_VIDEO_SLICEMODE_AVCVendorStartUnused = 0x7F000000,
     OMX_VIDEO_SLICEMODE_AVCLevelMax = 0x7FFFFFFF
 } OMX_VIDEO_AVCSLICEMODETYPE;*/
         /* https://e2e.ti.com/support/embedded/android/f/509/t/234521 */
@@ -2361,7 +2361,7 @@ class TSEncaspulator
         program[0].sdt = (sdt_program_ctx_t){
             .service_type = DVB_SERVICE_TYPE_DIGITAL_TELEVISION,
             .service_name = sdt,
-            .provider_name = sdt,
+            .provider_name = "Portsdown",
         };
 
         ts_stream[0].pid = VideoPid;
@@ -2449,17 +2449,17 @@ class TSEncaspulator
             tsframe.data = InternalBuffer + PictureHeaderSize;
             tsframe.size = InternalBufferSize;
 
-            /*if(key_frame==1) 
+            /*if(key_frame==1)
             {
-                
+
                 FILE *debugfile;
                 char Name[255];
                 sprintf(Name,"Pic%d.264",key_frame);
                 debugfile=fopen(Name,"wb");
                 fwrite(tsframe.data,1,tsframe.size,debugfile);
                 fclose(debugfile);
-                
-                               
+
+
             }*/
 
             InternalBufferSize = 0; //Purge
@@ -2604,18 +2604,18 @@ class TSEncaspulator
         /*
 frame_size = (double)codec->frame_size * 125 * stream->bitrate *
                  enc_params->frames_per_pes / enc_params->sample_rate;
-    // NB: libfdk-aac already doubles the frame size appropriately 
+    // NB: libfdk-aac already doubles the frame size appropriately
     pts_increment = (double)codec->frame_size * OBE_CLOCK * enc_params->frames_per_pes / enc_params->sample_rate;
 stream->audio_frame_size = (double)encoder->num_samples * 90000LL * output_stream->ts_opts.frames_per_pes / input_stream->sample_rate;
 
 ..
-coded_frame->random_access = 1; // Every frame output is a random access point 
+coded_frame->random_access = 1; // Every frame output is a random access point
 ..
 */
         //if(size<100) {fprintf(stderr,"!");return;}
         static uint64_t AudioFrame = 0;
         ts_frame_t tsframe;
-        
+
         //static float TimeToTransmitFrameUs=0;
         int len;
         double pts_increment;
@@ -2629,8 +2629,8 @@ coded_frame->random_access = 1; // Every frame output is a random access point
 
         if(abs(vpts-(AudioFrame*pts_increment+OffsetFromVideo))>400*90L)
 		{
-				
-				
+
+
 				fprintf(stderr,"===========   Audio Drift %lld Correction =%lld\n",abs(vpts-(AudioFrame*pts_increment+OffsetFromVideo))/90L,OffsetFromVideo/90LL);
                 OffsetFromVideo=vpts-AudioFrame*pts_increment;
 		}
@@ -2639,19 +2639,19 @@ coded_frame->random_access = 1; // Every frame output is a random access point
 			{
 				//printf("IDR Image=%d TotalSize=%d Temps=%d\n",tsframe.size,TotalFrameSize,TimeToTransmitFrameUs);
 				vdts=pts_increment*AudioFrame+OffsetFromVideo+(DelayPTS-5)*90LL ; //TimeToTransmitFrameUs*90L/1000;
-				vpts=pts_increment*AudioFrame+OffsetFromVideo+DelayPTS*90LL; 	
-				
+				vpts=pts_increment*AudioFrame+OffsetFromVideo+DelayPTS*90LL;
+
 			}
 			else
 			{
 				//printf("%d:%d %lld\n",Time->tv_sec,Time->tv_nsec/(int64_t)1E6L,key_frame);
 				vdts=(Time->tv_sec*1000+Time->tv_nsec/1000000.0)*90L ; //TimeToTransmitFrameUs*90L/1000;
-				vpts=(Time->tv_sec*1000+Time->tv_nsec/1000000.0)*90L; 	
-				
+				vpts=(Time->tv_sec*1000+Time->tv_nsec/1000000.0)*90L;
+
 				//tsframe.cpb_initial_arrival_time = vdts*300L -  DelayPTS*90*300L ;
 	                	//tsframe.cpb_final_arrival_time = vdts*300L -  DelayPTS*90*300L ;
-				
-				
+
+
 			}
             */
         AudioFrame++;
@@ -2662,23 +2662,23 @@ coded_frame->random_access = 1; // Every frame output is a random access point
         tsframe.pts = pts_increment * AudioFrame + OffsetFromVideo + DelayPTS * 90LL;       //  pts_increment*AudioFrame+DelayPTS*90L;
         //fprintf(stderr,"Keyframe %lld Video dts=%lld,pts=%lld Audio Size = %d dts=%lld,pts=%lld\n",key_frame, vdts / 90, vpts / 90,size, tsframe.dts / 90, tsframe.pts / 90);
         /*int ret =*/ ts_write_frames(writer, &tsframe, 1, &out, &len, &pcr_list);
-        
+
         /*if ((ret==0)&&len)
 			{
-				
+
 					fprintf(stderr,"Audio First PCR=%lld, End=%lld\n",pcr_list[0]/27000LL-10000,pcr_list[(len/188)-1]/27000LL-10000);
-		
+
 				if(vout)
 				{
 					int n,ret;
 					ret=ioctl(fileno(vout), FIONREAD, &n);
-					if((ret==0)&&(n>40000)) 
+					if((ret==0)&&(n>40000))
 						fprintf(stderr,"Overflow outpipe Pipe %d\n",n);
-			
+
 					 fwrite(out, 1, len, vout);
 				}
 				if(UdpOutput) udp_send(out,len);
-		
+
 			}
 			else
 			{
@@ -2724,7 +2724,7 @@ coded_frame->random_access = 1; // Every frame output is a random access point
         char *add[3];
         char interface[40];
         u_int16_t sock;
-        
+
         strcpy(text, ip);
         add[0] = strtok(text, ":");
         add[1] = strtok(NULL, ":");
@@ -2735,11 +2735,11 @@ coded_frame->random_access = 1; // Every frame output is a random access point
             sock = atoi(add[1]);
         if(add[2]==NULL)
         {
-           strcpy(interface,"0.0.0.0");      
+           strcpy(interface,"0.0.0.0");
         }
         else
         {
-          strcpy(interface,add[2]);  
+          strcpy(interface,add[2]);
         }
 
         // Construct the client sockaddr_in structure
@@ -2747,7 +2747,7 @@ coded_frame->random_access = 1; // Every frame output is a random access point
         m_client.sin_family = AF_INET;                // Internet/IP
         m_client.sin_addr.s_addr = inet_addr(add[0]); // IP address
         m_client.sin_port = htons(sock);              // server socket
-        
+
         in_addr_t localadapter = inet_addr(interface);
         setsockopt(m_sock, IPPROTO_IP, IP_MULTICAST_IF, (char*)&localadapter, sizeof(localadapter));
         //in_addr interface_addr;
@@ -2790,7 +2790,7 @@ class AudioEncoder
     AudioEncoder()
     {
 
-        
+
 
         if ((ErrorStatus = aacEncOpen(&hAacEncoder, 0x0 /*HeAACv2 only*/, 2 /*Stereo*/)) != AACENC_OK)
         {
@@ -2991,15 +2991,15 @@ class H264tots
     void Run(bool want_quit)
     {
         bool EsNotCompleted=true;
-        
+
         size_t n=fread(&esBuffer[Offset],1,1000,h264file);
         Offset+=n;
-        
-            
+
+
         while(EsNotCompleted)
         {
-            
-            
+
+
             //if(n!=0)   fprintf(stderr,"Offset=%d\n",Offset);
             if(Offset<5) {sleep(1);return;}
             size_t i;
@@ -3007,16 +3007,16 @@ class H264tots
             {
                 if((esBuffer[i]==0)&&(esBuffer[i+1]==0)&&(esBuffer[i+2]==0x1)/*&&(esBuffer[i+3]==0x21)*/)
                 {
-                   //fprintf(stderr,"Frame %d,Size=%d Type%x\n",key_frame,i,esBuffer[i+3]); 
+                   //fprintf(stderr,"Frame %d,Size=%d Type%x\n",key_frame,i,esBuffer[i+3]);
                    if((esBuffer[3]==0x21)||(esBuffer[3]==0x25))
                    {
-                    tsencoder.AddFrame(esBuffer,i, OMX_BUFFERFLAG_ENDOFFRAME, key_frame++, DelayPTS); 
+                    tsencoder.AddFrame(esBuffer,i, OMX_BUFFERFLAG_ENDOFFRAME, key_frame++, DelayPTS);
                    }
                    else
                     {
-                        tsencoder.AddFrame(esBuffer,i, OMX_BUFFERFLAG_CODECCONFIG, key_frame, DelayPTS); 
+                        tsencoder.AddFrame(esBuffer,i, OMX_BUFFERFLAG_CODECCONFIG, key_frame, DelayPTS);
                     }
-                   
+
                    memmove(esBuffer,esBuffer+i,Offset-i);
                    Offset=Offset-i;
                    break;
@@ -3026,15 +3026,15 @@ class H264tots
 
         }
 
-        
-        
-    }        
+
+
+    }
 
     void Terminate()
     {
         fclose(h264file);
         free(esBuffer);
-    }    
+    }
 };
 
 
@@ -3052,7 +3052,7 @@ class CameraTots
     VideoFromat CurrentVideoFormat;
     int DelayPTS;
     struct timespec InitTime;
-    
+
     bool VideoPreview = true;
     int m_IDRPeriod = 0;
     int m_RowBySlice;
@@ -3081,7 +3081,7 @@ class CameraTots
         camera.getSensorModes();
         camera.getSensorCameraMode();
         camera.setImageFilter(OMX_ALL, OMX_ImageFilterNoise);
-        
+
         while (!camera.ready())
         {
             std::cerr << "waiting for camera..." << std::endl;
@@ -3118,7 +3118,7 @@ class CameraTots
             encoder.setCodec(OMX_VIDEO_CodingAVC);
             m_IDRPeriod = IDRPeriod;
             /*if(!RowBySlice)
-        		  encoder.setIDR(IDRPeriod);	
+        		  encoder.setIDR(IDRPeriod);
             else
                   encoder.setIDR(0);	*/
             encoder.setIDR(IDRPeriod);
@@ -3136,10 +3136,10 @@ class CameraTots
 
             //encoder.setEED();
 
-            /*OMX_VIDEO_AVCProfileBaseline = 0x01,   //< Baseline profile 
-	    OMX_VIDEO_AVCProfileMain     = 0x02,   //< Main profile 
-	    OMX_VIDEO_AVCProfileExtended = 0x04,   //< Extended profile 
-	    OMX_VIDEO_AVCProfileHigh     = 0x08,   //< High profile 
+            /*OMX_VIDEO_AVCProfileBaseline = 0x01,   //< Baseline profile
+	    OMX_VIDEO_AVCProfileMain     = 0x02,   //< Main profile
+	    OMX_VIDEO_AVCProfileExtended = 0x04,   //< Extended profile
+	    OMX_VIDEO_AVCProfileHigh     = 0x08,   //< High profile
 		OMX_VIDEO_AVCProfileConstrainedBaseline
 	*/
 
@@ -3310,7 +3310,7 @@ class CameraTots
                 {
 				    if(((key_frame-1)%(m_IDRPeriod)>=m_IDRPeriod-2))
                     {
-                            
+
                             //encoder.setDynamicBitrate(EncVideoBitrate/4);
                            // encoder.setQPLimits(35,35);
                             if(((key_frame-1)%(m_IDRPeriod)==m_IDRPeriod-1))
@@ -3324,7 +3324,7 @@ class CameraTots
                             //encoder.setQPLimits(10,40);
                             //encoder.setMultiSlice(m_RowBySlice);
                     }
-                    
+
                 }*/
             // Buffer flushed, request a new buffer to be filled by the encoder component
             /*if(encBuffer.dataSize()!=65536)
@@ -3448,7 +3448,7 @@ class PictureTots
     VncClient *pvncclient;
     ffmpegsrc *pffmpeg;
     struct timespec InitTime;
-    
+
     AudioEncoder audioencoder;
     bool TxAudio=false;
   public:
@@ -3468,7 +3468,7 @@ class PictureTots
         DelayPTS = SetDelayPts;
         EncVideoBitrate = VideoBitrate;
         Mode = ModeInput;
-        
+
         TxAudio=(audiofilename!=NULL);
         if(TxAudio)
         {
@@ -3546,10 +3546,10 @@ class PictureTots
 
         //encoder.setEED();
 
-        /*OMX_VIDEO_AVCProfileBaseline = 0x01,   //< Baseline profile 
-	    OMX_VIDEO_AVCProfileMain     = 0x02,   //< Main profile 
-	    OMX_VIDEO_AVCProfileExtended = 0x04,   //< Extended profile 
-	    OMX_VIDEO_AVCProfileHigh     = 0x08,   //< High profile 
+        /*OMX_VIDEO_AVCProfileBaseline = 0x01,   //< Baseline profile
+	    OMX_VIDEO_AVCProfileMain     = 0x02,   //< Main profile
+	    OMX_VIDEO_AVCProfileExtended = 0x04,   //< Extended profile
+	    OMX_VIDEO_AVCProfileHigh     = 0x08,   //< High profile
 		OMX_VIDEO_AVCProfileConstrainedBaseline
 	*/
         encoder.setProfileLevel(OMX_VIDEO_AVCProfileHigh);
@@ -3691,21 +3691,21 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
 	OMX_U8 *PlanY=out;
 	OMX_U8 *PlanU=out+Width*Height;
 	OMX_U8 *PlanV=PlanU+(Width*Height)/4;
-	
+
 	//fprintf(stderr,"WidthMissin %d\n",WidthMissing);
 	int count=0;
 	for(int j=0;j<Height;j++)
 	{
 		for(int i=0;i<Width/2;i++)
 		{
-			
+
 			*(PlanU)=*(inprocess++);
 			if((j%2==0)) PlanU++;
 			*(PlanY++)=*(inprocess++);
 			*(PlanV)=*(inprocess++);
 			if((j%2==0)) PlanV++;
 			*(PlanY++)=*(inprocess++);
-			
+
 		}
 		count+=4*Width/2;
 		if(count>Size) return 0;
@@ -3729,7 +3729,7 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
             //fprintf(stderr,"Len = %"\n",encBufferLow
             /*if(key_frame%250==0)
 				{
-					QP--;	
+					QP--;
 					encoder.setQPLimits(QP,QP);
 					fprintf(stderr,"------ QP =%d\n",QP);
 				}*/
@@ -3829,7 +3829,7 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
                         else
                             fprintf(stderr, "incomplete\n");
                     }
-                }    
+                }
             }
             else
             {
@@ -3839,14 +3839,14 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
             }
 
 
-            
+
             // Buffer flushed, request a new buffer to be filled by the encoder component
             encBuffer.setFilled(false);
             //PictureBuffer.setFilled(true);
             encoder.callFillThisBuffer();
 
-            
-            
+
+
             return;
         }
         if (!want_quit && (FirstTime || PictureBuffer.filled()))
@@ -3875,7 +3875,7 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
                 struct timespec gettime_now,first_time;
 				long time_difference;
 				clock_gettime(CLOCK_REALTIME, &first_time);
-					
+
 				pgrabdisplay->GetPicture();
 				clock_gettime(CLOCK_REALTIME, &gettime_now);
 				time_difference = gettime_now.tv_nsec - first_time.tv_nsec;
@@ -3883,7 +3883,7 @@ int ConvertColor(OMX_U8 *out,OMX_U8 *in,int Size)
 					time_difference += 1E9;
 				fprintf(stderr,"Grab time=%ld us\n",time_difference/1000);
 
-               
+
                 int DisplayWidth, DisplayHeight, Rotate;
 
                 pgrabdisplay->GetDisplaySize(DisplayWidth, DisplayHeight, Rotate);
@@ -4183,7 +4183,7 @@ int main(int argc, char **argv)
     CurrentVideoFormat.ratio = VideoFromat::RATIO_16x9;
     CurrentVideoFormat.fov = false;
     /*
-if((CurrentVideoFormat.width<1920)&&(CurrentVideoFormat.width<1080))    
+if((CurrentVideoFormat.width<1920)&&(CurrentVideoFormat.width<1080))
     CurrentVideoFormat.fov=false; // To check
 else
      CurrentVideoFormat.fov=true; // To check
@@ -4198,7 +4198,7 @@ else
         CameraTots *cameratots = NULL;
         PictureTots *picturetots = NULL;
         H264tots *h264tots = NULL;
-                  
+
             int PictureMode = PictureTots::Mode_PATTERN;
             switch (TypeInput)
             {
@@ -4216,7 +4216,7 @@ else
                 if (ExtraArg == NULL)
                     ExtraArg = "/dev/video0";
                 picturetots = new PictureTots;
-                picturetots->Init(CurrentVideoFormat, OutputFileName, NetworkOutput, VideoBitrate, MuxBitrate, DelayPTS, pidpmt, sdt, VideoFramerate, IDRPeriod, RowBySlice, EnableMotionVectors, PictureMode, ExtraArg,audiofile,audiobitrate);    
+                picturetots->Init(CurrentVideoFormat, OutputFileName, NetworkOutput, VideoBitrate, MuxBitrate, DelayPTS, pidpmt, sdt, VideoFramerate, IDRPeriod, RowBySlice, EnableMotionVectors, PictureMode, ExtraArg,audiofile,audiobitrate);
                 break;
             case DISPLAY:
                 PictureMode = PictureTots::Mode_GRABDISPLAY;
@@ -4241,10 +4241,10 @@ else
             case H264IN:
             h264tots = new H264tots;
             h264tots->Init("transcode.264", OutputFileName, NetworkOutput, VideoBitrate, MuxBitrate, DelayPTS, pidpmt, sdt, VideoFramerate, IDRPeriod, RowBySlice);
-            break;    
+            break;
             }
-            
-        
+
+
 #if 1
         signal(SIGINT, signal_handler);
         signal(SIGTERM, signal_handler);
@@ -4259,7 +4259,7 @@ else
         {
 
             if (TypeInput == 0) cameratots->Run(want_quit);
-            
+
             if((TypeInput>=PATTERN)&&(TypeInput<=FFMPEG))    picturetots->Run(want_quit);
 
             if(TypeInput==H264IN)    h264tots->Run(want_quit);

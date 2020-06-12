@@ -253,14 +253,14 @@ extern "C"
                                  u, u_stride,
                                  crop_width, inv_crop_height, rotation);
             break;
-        case FOURCC_M420:
-            src = sample + (src_width * crop_y) * 12 / 8 + crop_x;
-            r = M420ToI420(src, src_width,
-                           y, y_stride,
-                           u, u_stride,
-                           v, v_stride,
-                           crop_width, inv_crop_height);
-            break;
+//        case FOURCC_M420:    // No longer supported by libyuv
+//            src = sample + (src_width * crop_y) * 12 / 8 + crop_x;
+//            r = M420ToI420(src, src_width,
+//                           y, y_stride,
+//                           u, u_stride,
+//                           v, v_stride,
+//                           crop_width, inv_crop_height);
+//            break;
         // Triplanar formats
         case FOURCC_I420:
         case FOURCC_YV12:
@@ -424,9 +424,9 @@ static int xioctl(int fh, unsigned long int request, void *arg)
 /*
 #define CLIP(color) (unsigned char)(((color) > 0xFF) ? 0xff : (((color) < 0) ? 0 : (color)))
 
-static void v4lconvert_yuyv_to_rgb24(const unsigned char *src, 
+static void v4lconvert_yuyv_to_rgb24(const unsigned char *src,
                                      unsigned char *dest,
-                                     int width, int height, 
+                                     int width, int height,
                                      int stride)
 {
     int j;
